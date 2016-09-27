@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- bower:css -->
+    <script type="text/javascript" src="angular.js"></script>
+    <!-- endbower -->
+</head>
+<body ng-app="myapp">
+<div ng-init="people = {
+   'Ari': 'orange',
+   'Q': 'purple',
+   'Sean': 'green'
+ }">
+    <ul>
+        <li ng-repeat="(name, color) in people">{{ name }}'s favorite color is {{ color }}
+        </li>
+    </ul>
+</div>
+<!-- bower:js -->
+<!-- endbower -->
+<script>
+    var app = angular.module("myapp",[]);
+</script>
+</body>
+</html>

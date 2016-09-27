@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- bower:css -->
+    <script type="text/javascript" src="angular.js"></script>
+    <!-- endbower -->
+</head>
+<body ng-app="myapp">
+<button ng-init="shouldShow = true" ng-click="shouldShow = !shouldShow">Flip the shouldShow variable</button>
+<div ng-show="shouldShow">
+    <h3>Showing {{ shouldShow }}</h3>
+</div> <div ng-hide="shouldShow">
+    <h3>Hiding {{ shouldShow }}</h3>
+</div>
+<!-- bower:js -->
+<!-- endbower -->
+<script>
+    var app = angular.module("myapp",[]);
+</script>
+</body>
+</html>

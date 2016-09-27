@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- bower:css -->
+    <script type="text/javascript" src="angular.js"></script>
+    <!-- endbower -->
+</head>
+<body ng-app="myapp">
+
+<div ng-controller="PlayerController">
+    <button ng-click="play()" class="button" ng-show="!playing">Play</button>
+    <button ng-click="stop()" class="button alert" ng-show="playing">Stop</button>
+    Playing audio: <b>{{ playing }}</b>
+</div>
+<!-- bower:js -->
+<!-- endbower -->
+<script>
+    var app = angular.module("myapp",[]);
+    app.controller('PlayerController', ['$scope', function($scope) {
+        $scope.playing = false;
+        $scope.audio = document.createElement('audio');
+        $scope.audio.src = 'Aimer - Brave Shine.mp3';
+        $scope.play = function() {
+            $scope.audio.play();
+            $scope.playing = true;
+        };
+        $scope.stop = function() {
+            $scope.audio.pause();
+            $scope.playing = false;
+        };
+        $scope.audio.addEventListener('ended', function() {
+            $scope.$apply(function() {
+                $scope.stop()
+            });
+        });
+    }]);
+</script>
+</body>
+</html>

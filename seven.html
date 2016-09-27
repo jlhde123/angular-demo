@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- bower:css -->
+    <script type="text/javascript" src="angular.js"></script>
+    <!-- endbower -->
+</head>
+<body ng-app="myapp">
+
+<div ng-controller="PlayerController">
+    {{message}}
+    {{ programs }}
+</div>
+<!-- bower:js -->
+<!-- endbower -->
+<script>
+    var app = angular.module("myapp",[]);
+    var apiKey = 'MDI2ODY2MDgzMDE0NzQ4NzIxMjc0OTE2ZA000',
+            nprUrl = 'http://api.npr.org/query?id=61&fields=relatedLink,title,byline,text,audio,image,pullQuote,all&output=JSON';
+
+    app.controller('PlayerController', function($scope, $http) {
+        // Hidden our previous section's content
+        // construct our http request
+        $http({
+            method: 'JSONP',
+            url: nprUrl + '&apiKey=' + apiKey + '&callback=JSON_CALLBACK'
+        }).success(function(data, status) {
+            // Now we have a list of the stories (data.list.story)
+            // in the data object that the NPR API
+            // returns in JSON that looks like:
+            // data: { "list": {
+            //   "title": ...
+            //   "story": [
+            //     { "id": ...
+            //       "title": ...
+            $scope.message  =data.messages;
+            $scope.programs = data.list.story;
+        }).error(function(data, status) {
+            // Some error occurred
+        });
+    });
+</script>
+</body>
+</html>

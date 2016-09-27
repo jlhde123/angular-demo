@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- bower:css -->
+    <script type="text/javascript" src="angular.js"></script>
+    <!-- endbower -->
+</head>
+<body ng-app="myapp">
+
+<div ng-controller="MyController">
+    <h5>{{ clock }}</h5>
+</div>
+<!-- bower:js -->
+<!-- endbower -->
+<script>
+    var app = angular.module("myapp",[]);
+    app.controller('MyController', function($scope) {
+        $scope.person = { name: "Ari Lerner" };
+        console.info ($scope)
+        var updateClock = function() {
+            $scope.clock = new Date();
+        };
+        var timer = setInterval(function() {
+            $scope.$apply(updateClock);
+        }, 1000);
+        updateClock();
+    });
+</script>
+</body>
+</html>

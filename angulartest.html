@@ -1,0 +1,44 @@
+<html>
+<head>
+    <title>test</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div ng-app="myapp" ng-controller="conangular">
+        <table >
+            <thead>
+                <tr>
+                    <td>序列</td>
+                    <td>名字</td>
+                    <td>城市</td>
+                    <td>国家</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="people in peoples">
+                    <td ng-if="$odd" style="background-color:#f1f1f1" >{{$index+1}}</td>
+                    <td ng-if="$even">{{$index+1}}</td>
+
+                    <td ng-if="$odd" style="background-color:#f1f1f1"  ng-bind="people.Name"></td>
+                    <td ng-if="$even" ng-bind="people.Name"></td>
+
+                    <td ng-if="$odd" style="background-color:#f1f1f1"  ng-bind="people.City"></td>
+                    <td ng-if="$even" ng-bind="people.City"></td>
+
+                    <td ng-if="$odd" style="background-color:#f1f1f1"  ng-bind="people.Country"></td>
+                    <td ng-if="$even" ng-bind="people.Country" ></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+<script src="angular.js"></script>
+<script>
+    var myapp = angular.module("myapp",[]);
+    myapp.controller("conangular" , function($scope,$http){
+        $http.get("data.json").success(function(res){
+            $scope.peoples=res.records;
+        })
+    });
+</script>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- bower:css -->
+    <script type="text/javascript" src="angular.js"></script>
+    <!-- endbower -->
+</head>
+<body ng-app="myapp">
+
+
+
+{{ name }}
+<!-- bower:js -->
+<!-- endbower -->
+<script>
+    var myapp = angular.module("myapp",[]);
+    myapp.run(function($rootScope) {
+        $rootScope.name = "Ari Lerner";
+    });
+</script>
+</body>
+</html>
