@@ -1,0 +1,13 @@
+<div ng-transclude="" ng-click="toggleul()"></div>
+<div>
+    <ul class="list-group" ng-show="visible">
+        <li class="list-group-item" ng-repeat="vehicle in outVehicle">
+            <dl class="dl-horizontal">
+                <dt>url:</dt>
+                <dd ng-bind="vehicle.naMe"></dd>
+                <dt>url:</dt>
+                <dd ng-bind="vehicle.uRl"></dd>
+            </dl>
+        </li>
+    </ul>
+</div>

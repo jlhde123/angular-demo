@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- bower:css -->
+    <!-- endbower -->
+    <script type="text/javascript" src="angular.js"></script>
+</head>
+<body ng-app="myapp">
+
+
+<hello></hello>
+<!-- bower:js -->
+<!-- endbower -->
+
+<script type="text/javascript">
+    var module = angular.module('myapp',['myapp-directive']);
+
+    var module_directive = angular.module('myapp-directive',['module-test']);
+    module.directive('hello',function (test){
+       return  {
+           restrict :'E',
+           template:'<div>'+test.getContent()+'</div>',
+           replace:true
+       }
+    });
+    var module_test = angular.module('module-test',[]);
+    module_test.factory('test',function (){
+        return {
+            getContent:function (){
+                return 'hhha!!!!';
+            }
+        };
+    });
+</script>
+</body>
+</html>

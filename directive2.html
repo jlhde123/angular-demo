@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- bower:css -->
+    <!-- endbower -->
+    <link type="text/css" rel="stylesheet" href="dist/css/bootstrap.css">
+    <script type="text/javascript" src="angular.js"></script>
+</head>
+<body ng-app="myapp" ng-init="num=111222">
+<fence-alarm interval='5000' usrid='jlh'>
+    <div style="border: 1px solid black">围栏预警({{num}})</div>
+</fence-alarm>
+<!-- bower:js -->
+<!-- endbower -->
+<script type="text/javascript">
+    var main_module = angular.module('myapp', ['anzer.fence-alarm']);
+
+    var module = angular.module('anzer.fence-alarm', ['anzer.baidufencealarm-service']);
+    module.directive('fenceAlarm', function () {
+        return {
+            restrict: 'E',
+            controller: function ($scope, $element, $attrs, $transclude, BaiduFenceAlarmService, $interval) {
+                BaiduFenceAlarmService.liveData($scope, $attrs.usrid, 'url');
+                var time = $interval(function () {
+                    BaiduFenceAlarmService.liveData($scope, $attrs.usrid, 'url');
+                }, $attrs.interval);
+
+                $scope.visible = false;
+                $scope.toggleul = function () {
+                    $scope.visible = !$scope.visible;
+                }
+            },
+            templateUrl: 'alarmlist.html',
+            transclude: true
+        }
+    });
+
+    var module_fence = angular.module('anzer.baidufencealarm-service', []);
+    module_fence.factory('BaiduFenceAlarmService', function () {
+        var outVehicle = [{"naMe":"123","uRl":"456"}];
+        var index = 1;
+        var service = {
+            liveData: function ($scope, usrId, url) {
+                outVehicle.push({"naMe":usrId,"uRl":url});
+                index++;
+                $scope.num = outVehicle.length;
+                $scope.outVehicle = outVehicle;
+            },
+            getData: function () {
+                return outVehicle;
+            }
+        }
+        return service;
+    });
+</script>
+</body>
+</html>
